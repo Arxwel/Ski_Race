@@ -315,28 +315,35 @@
 
 			</g>
 
-			<g id="scene4">
 
-				<!--Environnement Creation-->
-				<use href="#sky"/>
-				<use href="#cloud" transform="translate(-120,-80)">
-				<animate id="nuage11" attributeType="XML" attributeName="x" from="0" to="-200" dur="2s" begin="0s; nuage12.end"/>
-					<animate id="nuage12" attributeType="XML" attributeName="x" from="500" to="0" dur="2s" begin="nuage11.end"/>
-				</use>
-				<use href="#cloud" transform="translate(300,-30)" >
-				 <animate id="nuage21" attributeType="XML" attributeName="x" from="0" to="-700" dur="3s" begin="0s; nuage22.end"/>
-				 <animate id="nuage22" attributeType="XML" attributeName="x" from="-750" to="0" dur="7s" begin="nuage21.end"/>
-				</use>
-				<use href="#cloud" transform="translate(-200, 150)" >
-				 <animate id="nuage31" attributeType="XML" attributeName="x" from="0" to="750" dur="9s" begin="0s; nuage32.end"/>
-				 <animate id="nuage32" attributeType="XML" attributeName="x" from="-375" to="0" dur="4s" begin="nuage31.end"/>
-				</use>
+      <g id="scene4">
+        <!--Environnement Creation-->
+        <use href="#sky"/>
+        <use href="#cloud" transform="translate(0,-80)">
+          <animate id="nuage11" attributeType="XML" attributeName="x" from="600" to="-1200" dur="2s" begin="0.6s" repeatCount="indefinite"/>
+          <!--<animate id="nuage12" attributeType="XML" attributeName="x" from="-1000" to="600" dur="0s" begin="nuage11.end"/>-->
+        </use>
+        <use href="#cloud" transform="translate(300,30)" >
+          <animate id="nuage21" attributeType="XML" attributeName="x" from="600" to="-1200" dur="1s" begin="0s" repeatCount="indefinite"/>
+          <!--<animate id="nuage22" attributeType="XML" attributeName="x" from="0" to="-750" dur="1s" begin="nuage21.end"/>-->
+        </use>
+        <use href="#cloud" transform="translate(-200, 150)" >
+          <animate id="nuage31" attributeType="XML" attributeName="x" from="750" to="-550" dur="1s" begin="0.3s" repeatCount="indefinite"/>
+          <!--<animate id="nuage32" attributeType="XML" attributeName="x" from="0" to="-675" dur="4s" begin="nuage31.end"/>-->
+        </use>
 
-				<!--Character Creation-->
-				<use href="#sandrine_full_ski" transform="translate(35,140) "/>
-				<use href="#red_guy_ski" transform="translate(250,190) scale(0.5,0.5) "/>
+        <path id="sandrine_motionPath" d="M0,0 q500,-200 1000,100" fill="none" stroke="black" stroke-width="2" transform="translate(-60,200)"/>
 
-			</g>
+        <!--Character Creation-->
+        <use href="#sandrine_full_ski" transform="translate(35,190)">
+          <animateMotion dur="3s" begin="toSc4.begin" rotate="auto"
+            path="M0,0 q500,-200 1000,100" fill="none"/>
+          
+        </use>
+
+        <use href="#red_guy_ski" transform="translate(250,190) scale(0.5,0.5) "/>
+
+      </g>
 
 			<g id="scene5">
 
@@ -501,12 +508,12 @@
 				<!--Contestants-->
 				<use href="#sandrine_full_ski" >
 					<animateMotion dur="1.5s"
-						path="M0 60 C100 120 250 250 350 320 L550 320" fill="none" stroke="black" begin="20s" />
+						path="M0 60 C100 120 250 250 350 320 L550 320" fill="none" stroke="black" begin="toSc5.begin" />
 				</use>
 
 				<use href="#red_guy_ski" transform="scale(0.5,0.5)">
 					<animateMotion dur="1.7s"
-						path="M0 30 C100 50 250 180 350 250 L545 250" rotate="90" fill="none" stroke="black" begin="20s" />
+						path="M0 30 C100 50 250 180 350 250 L545 250" rotate="90" fill="none" stroke="black" begin="toSc5.begin" />
 				</use>
 
 			</g>
@@ -515,16 +522,16 @@
 
 		<use href="#scene5"/>
 		<use href="#scene4">
-			<animate attributeType="CSS" attributeName="visibility" to="hidden" begin="20s" />
+			<animate attributeType="CSS" attributeName="visibility" to="hidden" dur="5s" begin="toSc4.end" fill="freeze" id="toSc5"/>
 		</use>
 		<use href="#scene3">
-			<animate attributeType="CSS" attributeName="visibility" to="hidden" begin="15s" />
+			<animate attributeType="CSS" attributeName="visibility" to="hidden" dur="5s" begin="toSc3.end" fill="freeze" id="toSc4" />
 		</use>
 		<use href="#scene2">
-			<animate attributeType="CSS" attributeName="visibility" to="hidden" begin="10s" />
+			<animate attributeType="CSS" attributeName="visibility" to="hidden" dur="5s" begin="toSc2.end" fill="freeze" id="toSc3" />
 		</use>
 		<use href="#scene1">
-    	<animate attributeType="CSS" attributeName="visibility" to="hidden" begin="5s" id="toto"/>
+    	<animate attributeType="CSS" attributeName="visibility" to="hidden" begin="5s" dur="5s" fill="freeze" id="toSc2"/>
   	</use>
 
 </svg>
