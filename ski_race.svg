@@ -314,11 +314,17 @@
         <!--Character Creation-->
         <use href="#sandrine_full_ski" transform="translate(35,190)">
           <animateMotion dur="3s" begin="toSc4.begin" rotate="auto"
-            path="M0,0 q500,-200 1000,100" fill="none"/>
-
+            path="M0,200 q500,-200 1000,100" fill="none"/>
+          <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 0 0" to="-360 0 0" repeatCount="indefinite" dur="1s" />
+          <animateTransform attributeType="xml" attributeName="transform" type="scale" from="1 1 " to="-1 1" repeatCount="indefinite" dur="0.5s" additive="sum"/>
         </use>
 
-        <use href="#red_guy_ski" transform="translate(250,190) scale(0.5,0.5) "/>
+        <use href="#red_guy_ski" transform="translate(250,190)">
+          <animateMotion dur="4s" begin="toSc4.begin" rotate="auto"
+            path="M-50,400 q500,-200 1000,100" fill="none"/>
+          <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" repeatCount="indefinite" dur="1s" />
+          <animateTransform attributeType="xml" attributeName="transform" type="scale" from="0.5 0.5 " to="-0.5 0.5" repeatCount="indefinite" dur="0.5s" additive="sum"/>
+        </use>
 
       </g>
 
