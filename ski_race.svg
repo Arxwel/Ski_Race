@@ -1,88 +1,60 @@
 <?xml version="1.0" standalone="no"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="750" height="500" viewBox="0 0 750 500" xmlns:xlink="http://www.w3.org/1999/xlink" >
-  	<defs>
-      <g id="scene1">
+		<defs>
 
-        <!-- Filters for sun and clouds -->
-    		<filter id="cloud_blur" x="0" y="0">
-    			<feGaussianBlur in="SourceGraphic" stdDeviation="2" />
-    		</filter>
-    		<filter id="sun_blur" x="0" y="0">
-    			<feGaussianBlur in="SourceGraphic" stdDeviation="15" />
-    		</filter>
+	    <!-- Filters for sun and clouds -->
+			<filter id="cloud_blur" x="0" y="0">
+				<feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+			</filter>
+			<filter id="sun_blur" x="0" y="0">
+				<feGaussianBlur in="SourceGraphic" stdDeviation="15" />
+			</filter>
 
+			<!-- Sky and its components -->
+			<g id="sky">
+				<linearGradient id="sky_grad" x1="0%" y1="60%" x2="0%" y2="0%">
+					<stop offset="0%" style="stop-color:#00BFFF;stop-opacity:1" />
+					<stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:1" />
+				</linearGradient>
+				<rect fill="url(#sky_grad)" x="0" y="0" width="750" height="500"/>
+			</g>
 
-    		<!-- Sky and its components -->
-    		<g id="sky">
-    			<linearGradient id="sky_grad" x1="0%" y1="60%" x2="0%" y2="0%">
-    				<stop offset="0%" style="stop-color:#00BFFF;stop-opacity:1" />
-    				<stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:1" />
-    			</linearGradient>
-    			<rect fill="url(#sky_grad)" x="0" y="0" width="750" height="500"/>
-    		</g>
+			<g id="cloud"  filter="url(#cloud_blur)">
+				<path d="M230 200 C210 170 230 120 250 150 C260 100 285 120 285 150 C300 145 310 170 300 200" fill="white" />
+			</g>
 
-    		<g id="cloud"  filter="url(#cloud_blur)">
-    			<path d="M230 200 C210 170 230 120 250 150 C260 100 285 120 285 150 C300 145 310 170 300 200" fill="white" />
-    		</g>
+			<g id="sun" filter="url(#sun_blur)">
+				<circle cx="0" cy="10" r="45" fill="yellow" />
+			</g>
 
-    		<g id="sun" filter="url(#sun_blur)">
-    			<circle cx="0" cy="10" r="45" fill="yellow" />
-    		</g>
+			<!-- Misc. -->
+			<g id="tree">
+				<linearGradient id="leaves_grad" x1="0%" y1="60%" x2="0%" y2="0%">
+					<stop offset="0%" style="stop-color:#336600;stop-opacity:1" />
+					<stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:1" />
+				</linearGradient>
 
+				<g id="leaves">
+					<path d="M-40,0 l65,-50 L90,0 z" fill="url(#leaves_grad)" stroke="#003300"/>
+				</g>
 
-    		<!-- Start of the race -->
-    		<g id="Race_start">
+				<g id="trunk">
+					<rect width="30" height="60" fill="saddlebrown" stroke="#6f370f"/>
+				</g>
 
-    			<g id="starting_slope">
-    				<linearGradient id="slope_grad" x1="0%" y1="60%" x2="0%" y2="0%">
-    					<stop offset="0%" style="stop-color:#F0F8FF;stop-opacity:1" />
-    					<stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:1" />
-    				</linearGradient>
-    				<path d="M0 300 L300 300 750 500 0 500" fill="url(#slope_grad)"/>
-    			</g>
+				<g id="full_tree">
+					<use href="#trunk"/>
+					<use href="#leaves" transform="translate(-10,0)"/>
+					<use href="#leaves" transform="translate(-10,-45)"/>
+					<use href="#leaves" transform="translate(-10,-90)"/>
+				</g>
+			</g>
 
-    		</g>
+			<g id="ski">
+				<path d="M0,0 Q57,0 60,-7" stroke-width="3"/>
+			</g>
 
-
-    		<!-- Misc. -->
-    		<g id="Misc">
-
-					<g id="flag">
-    				<rect x="0" y="0" width="5" height="100" fill="orangered"/>
-    				<rect x="0" y="0" width="50" height="40" fill="green"/>
-    			</g>
-
-    			<g id="tree">
-    				<linearGradient id="leaves_grad" x1="0%" y1="60%" x2="0%" y2="0%">
-    					<stop offset="0%" style="stop-color:#336600;stop-opacity:1" />
-    					<stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:1" />
-    				</linearGradient>
-
-    				<g id="leaves">
-    					<path d="M-40,0 l65,-50 L90,0 z" fill="url(#leaves_grad)" stroke="#003300"/>
-    				</g>
-
-    				<g id="trunk">
-    					<rect width="30" height="60" fill="saddlebrown" stroke="#6f370f"/>
-    				</g>
-
-    				<g id="full_tree">
-    					<use href="#trunk"/>
-    					<use href="#leaves" transform="translate(-10,0)"/>
-    					<use href="#leaves" transform="translate(-10,-45)"/>
-    					<use href="#leaves" transform="translate(-10,-90)"/>
-    				</g>
-    			</g>
-
-    			<g id="ski">
-    				<path d="M0,0 Q57,0 60,-7" stroke-width="3"/>
-    			</g>
-
-					<path d="m150 -90 L 782 190" fill="none" stroke="black" id="slope_move"/>
-    		</g>
-
-
-    	<!-- Characters -->
+			<!-- Characters -->
     	 <g id="characters">
 
     		<g id="redguy">
@@ -169,54 +141,87 @@
     		</g>
     	</g>
 
+
+      <g id="scene1">
+
+    		<!-- Start of the race -->
+    		<g id="Race_start">
+
+    			<g id="starting_slope">
+    				<linearGradient id="slope_grad" x1="0%" y1="60%" x2="0%" y2="0%">
+    					<stop offset="0%" style="stop-color:#F0F8FF;stop-opacity:1" />
+    					<stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:1" />
+    				</linearGradient>
+    				<path d="M0 300 L300 300 750 500 0 500" fill="url(#slope_grad)"/>
+    			</g>
+
+    		</g>
+
+
+    		<!-- Misc. -->
+    		<g id="Misc">
+
+					<g id="flag">
+    				<rect x="0" y="0" width="5" height="100" fill="orangered"/>
+    				<rect x="0" y="0" width="50" height="40" fill="green"/>
+    			</g>
+
+					<path d="m150 -90 L 782 190" fill="none" stroke="black" id="slope_move"/>
+    		</g>
+
+
 			<!-- Environment Creation -->
 			<use href="#sky"/>
+
 			<use href="#sun" />
+
 			<use href="#cloud" transform="translate(-120,-80)">
-			<animate id="nuage11" attributeType="XML" attributeName="x" from="0" to="750" dur="6s" begin="0s; nuage12.end"/>
-			<animate id="nuage12" attributeType="XML" attributeName="x" from="-250" to="0" dur="2s" begin="nuage11.end"/>
+				<animate id="nuage11" attributeType="XML" attributeName="x" from="0" to="750" dur="6s" begin="0s; nuage12.end"/>
+				<animate id="nuage12" attributeType="XML" attributeName="x" from="-250" to="0" dur="2s" begin="nuage11.end"/>
 			</use>
+
 			<use href="#cloud" transform="translate(300,-30)" >
 				<animate id="nuage21" attributeType="XML" attributeName="x" from="0" to="750" dur="7s" begin="0s; nuage22.end"/>
-			<animate id="nuage22" attributeType="XML" attributeName="x" from="-750" to="0" dur="7s" begin="nuage21.end"/>
+				<animate id="nuage22" attributeType="XML" attributeName="x" from="-750" to="0" dur="7s" begin="nuage21.end"/>
 			</use>
+
 			<use href="#cloud" transform="translate(-200, 150)" >
 				<animate id="nuage31" attributeType="XML" attributeName="x" from="0" to="750" dur="9s" begin="0s; nuage32.end"/>
-			<animate id="nuage32" attributeType="XML" attributeName="x" from="-375" to="0" dur="4s" begin="nuage31.end"/>
+				<animate id="nuage32" attributeType="XML" attributeName="x" from="-375" to="0" dur="4s" begin="nuage31.end"/>
 			</use>
+
 			<use href="#starting_slope"/>
+
 			<use href="#full_tree" transform="translate(150,420) scale(0.7,0.7)" />
+
 			<use href="#full_tree" transform="translate(350,445) scale(0.6,0.6)" />
+
 			<use href="#full_tree" transform="translate(0,264) scale(0.6,0.6)" />
 
 			<!-- Characters Creation-->
 			<use href="#red_guy_ski" transform="translate(350,155) scale(0.5)">
 				<animate attributeType="XML" attributeName="x" from="0" to="70" dur="1.4s" fill="freeze" id ="strred"/>
 				<animateMotion dur="5s" begin="strred.end" repeatCount="indefinite" rotate="auto">
-				<mpath xlink:href="#slope_move"/>
-			</animateMotion>
-			</use>
-				<use href="#MRNoel_full_ski" >
-					<animate attributeType="XML" attributeName="x" from="50" to="150" dur="2s" fill="freeze" id ="str"/>
-					<animateMotion dur="4s" begin="str.end" repeatCount="indefinite" rotate="auto">
 					<mpath xlink:href="#slope_move"/>
 				</animateMotion>
-				</use>
+			</use>
+
+			<use href="#MRNoel_full_ski" >
+				<animate attributeType="XML" attributeName="x" from="50" to="150" dur="2s" fill="freeze" id ="str"/>
+				<animateMotion dur="4s" begin="str.end" repeatCount="indefinite" rotate="auto">
+					<mpath xlink:href="#slope_move"/>
+				</animateMotion>
+			</use>
 
 			<use href="#sandrine_full_ski" transform="translate(250,255)">
 				<animate attributeType="XML" attributeName="x" from="0" to="70" dur="1.6s" fill="freeze" id ="strsan"/>
 				<animateMotion dur="7s" begin="strsan.end" repeatCount="indefinite" rotate="auto">
-				<mpath xlink:href="#slope_move"/>
-			</animateMotion>
+					<mpath xlink:href="#slope_move"/>
+				</animateMotion>
 			</use>
-      </g>
+    </g>
 
       <g id="scene2">
-
-				<!-- Sky and its components -->
-				<g id="sky">
-					<rect width="750" height="500" fill="url(#sky_grad)"/>
-				</g>
 
 				<!--slope-->
 					<g id="slope">
@@ -249,15 +254,6 @@
 					</g>
 				</g>
 
-				<!--Character creation
-				<use href="#body" />
-				<use href="#eyes" x="370" y="240" />
-				<use href="#eyes" x="425" y="240" />
-				<use href="#nose" />
-				<use href="#eyebrows" />
-				<use href="#mouth"/>
-				<use href="#hair"/>
-        -->
 				<!--Environnement creation-->
 				<use href="#sky"/>
 				<use href="#Snowmon" x="460" y="350" transform="scale(0.45)"/>
@@ -273,32 +269,13 @@
 			</g>
 
 			<g id="scene3">
-				<!-- Sky and its components -->
-				<g id="sky">
-						<rect fill="url(#sky_grad)" x="0" y="0" width="750" height="500"/>
-				 </g>
 
-				 <!--slope-->
+			 	<!--slope-->
 				 <g id="mountain">
 					 <path d="M0 165 C100 335 200 360 700 250 L680 500 L0 500" fill="url(#slope_grad)"/>
 				 </g>
 				 <g id="springboard">
 					 <path d="M690 250 L670 500 L685 500 L705 250" fill="peru"/>
-				 </g>
-				 <!--Misc-->
-				 <g id="tree">
-					 <g id="leaves">
-						 <path d="M-40,0 l65,-50 L90,0 z" fill="url(#leaves_grad)" stroke="#003300"/>
-					 </g>
-					 <g id="trunk">
-						 <rect width="30" height="60" fill="saddlebrown" stroke="#6f370f"/>
-					 </g>
-					 <g id="full_tree">
-						 <use href="#trunk"/>
-						 <use href="#leaves" transform="translate(-10,0)"/>
-						 <use href="#leaves" transform="translate(-10,-45)"/>
-						 <use href="#leaves" transform="translate(-10,-90)"/>
-					 </g>
 				 </g>
 
 				 <!--Environnement Creation-->
@@ -319,14 +296,17 @@
 
 				<!--Environnement Creation-->
 				<use href="#sky"/>
+
 				<use href="#cloud" transform="translate(-120,-80)">
-				<animate id="nuage11" attributeType="XML" attributeName="x" from="0" to="-200" dur="2s" begin="0s; nuage12.end"/>
+					<animate id="nuage11" attributeType="XML" attributeName="x" from="0" to="-200" dur="2s" begin="0s; nuage12.end"/>
 					<animate id="nuage12" attributeType="XML" attributeName="x" from="500" to="0" dur="2s" begin="nuage11.end"/>
 				</use>
+
 				<use href="#cloud" transform="translate(300,-30)" >
-				 <animate id="nuage21" attributeType="XML" attributeName="x" from="0" to="-700" dur="3s" begin="0s; nuage22.end"/>
-				 <animate id="nuage22" attributeType="XML" attributeName="x" from="-750" to="0" dur="7s" begin="nuage21.end"/>
+					<animate id="nuage21" attributeType="XML" attributeName="x" from="0" to="-700" dur="3s" begin="0s; nuage22.end"/>
+					<animate id="nuage22" attributeType="XML" attributeName="x" from="-750" to="0" dur="7s" begin="nuage21.end"/>
 				</use>
+
 				<use href="#cloud" transform="translate(-200, 150)" >
 				 <animate id="nuage31" attributeType="XML" attributeName="x" from="0" to="750" dur="9s" begin="0s; nuage32.end"/>
 				 <animate id="nuage32" attributeType="XML" attributeName="x" from="-375" to="0" dur="4s" begin="nuage31.end"/>
