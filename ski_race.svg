@@ -2,12 +2,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="750" height="500" viewBox="0 0 750 500" xmlns:xlink="http://www.w3.org/1999/xlink" >
 		<defs>
 
-	    <!-- Filters for sun and clouds -->
+	    <!-- Filters for sun, clouds, mountains and houses -->
 			<filter id="cloud_blur" x="0" y="0">
 				<feGaussianBlur in="SourceGraphic" stdDeviation="2" />
 			</filter>
 			<filter id="sun_blur" x="0" y="0">
 				<feGaussianBlur in="SourceGraphic" stdDeviation="15" />
+			</filter>
+			<filter id="moutain_blur" x="0" y="0">
+				<feGaussianBlur in="SourceGraphic" stdDeviation="1" />
+			</filter>
+			<filter id="house_blur" x="0" y="0">
+				<feGaussianBlur in="SourceGraphic" stdDeviation="7" />
 			</filter>
 
 			<!-- Sky and its components -->
@@ -20,7 +26,7 @@
 			</g>
 
 			<g id="cloud"  filter="url(#cloud_blur)">
-				<path d="M230 200 C210 170 230 120 250 150 C260 100 285 120 285 150 C300 145 310 170 300 200" fill="white" />
+				<path d="M230 200 C210 170 230 120 250 150 C260 100 285 120 285 150 C300 145 310 170 300 200" fill="white"/>
 			</g>
 
 			<g id="sun" filter="url(#sun_blur)">
@@ -28,10 +34,18 @@
 			</g>
 
 			<!--Misc. -->
-			<g id="moutains">
-				<path d="M400 400 L410 360 L420 410 L440 370 L440 430 L460 400 L450 450 L470 440 L450 460 L470 490 L445 465 L447 500 L425 470
-								L415 495 L400 460 L350 490 L385 440 L340 435 L375 430 L350 400 L385 405 L375 390 L385 400 L390 370" fill="crimson" stroke-width="4" stroke="firebrick" id="explode"/>
+			<path d="M400 400 L410 360 L420 410 L440 370 L440 430 L460 400 L450 450 L470 440 L450 460 L470 490 L445 465 L447 500 L425 470
+							L415 495 L400 460 L350 490 L385 440 L340 435 L375 430 L350 400 L385 405 L375 390 L385 400 L390 370" fill="crimson" stroke-width="4" stroke="firebrick" id="explode"/>
+
+			<linearGradient id="mountains_grad" x1="0%" y1="40%" x2="0%" y2="0%">
+				<stop offset="0%" style="stop-color:#5F5346;stop-opacity:1" />
+				<stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:1" />
+			</linearGradient>
+
+			<g id="mountains">
+				<path d="M0,0 L200,-400 l200,200 l300,-200 l125,400 z" fill="url(#mountains_grad)"/>
 			</g>
+
 
 			<g id="tree">
 				<linearGradient id="leaves_grad" x1="0%" y1="60%" x2="0%" y2="0%">
@@ -58,6 +72,49 @@
 			<g id="ski">
 				<path d="M0,0 Q57,0 60,-7" stroke-width="3"/>
 			</g>
+
+
+
+			<!--House-->
+			<linearGradient id="roof_grad" x1="0%" y1="50%" x2="0%" y2="0%">
+				<stop offset="0%" style="stop-color:brown;stop-opacity:1" />
+				<stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:1" />
+			</linearGradient>
+
+			<g id="roof">
+				<use href="#chimney" x="250" y="-100"/>
+				<path d="M0,0 l175,-100 l175,100 z" fill="url(#roof_grad)"/>
+			</g>
+
+			<g id="door">
+				<rect rx="3" ry="3" fill="#666699" width="90" height="130"/>
+				<circle cx="15" cy="70" r="8" fill="#ffcc00"/>
+				<ellipse cx="-39" cy="56" rx="4" ry="2" fill="white" transform="rotate(-45)"/>
+			</g>
+
+			<g id="house_base">
+				<rect rx="3" ry="3" width="300" height="200" fill="#993300"/>
+			</g>
+
+			<g id="window_brilliance">
+				<path d="M0,0 l0,-20 l20,-30 l20,0 z" fill="white"/>
+			</g>
+
+			<g id="window">
+				<rect rx="3" ry="3" width="70" height="70" fill="#99ccff"/>
+				<use href="#window_brilliance" x="" y="50"/>
+				<rect x="33" width="5" height="70" fill="black"/>
+				<rect y="33" width="70" height="5" fill="black"/>
+			</g>
+
+			<g id="full_house">
+				<use href="#roof"/>
+				<use href="#house_base" x="25"/>
+				<use href="#door" x="130" y="70"/>
+				<use href="#window" x="40" y="50"/>
+				<use href="#window" x="240" y="50"/>
+			</g>
+			<!---->
 
 			<!-- Characters -->
     	 <g id="characters">
@@ -168,10 +225,15 @@
 
 					<g id="flag">
     				<rect x="0" y="0" width="5" height="100" fill="orangered"/>
-    				<rect x="0" y="0" width="50" height="40" fill="green"/>
+    				<rect x="0" y="0" width="50" height="40" fill="green">
+							<animateTransform attributeType="xml" attributeName="transform" type="skewY" from="-15" to="15" dur="0.2s" begin="hide_starting_flag.begin; starting_flag_animation_2.end" id="starting_flag_animation_1"/>
+							<animateTransform attributeType="xml" attributeName="transform" type="skewY" from="15" to="-15" dur="0.2s" begin="starting_flag_animation_1.end" id="starting_flag_animation_2"/>
+						</rect>
     			</g>
 
 					<path d="m150 -90 L 782 190" fill="none" stroke="black" id="slope_move"/>
+					<text fill="black" font-family="Arial" font-size="30" id="text_click">Click here!</text>
+					<circle cx="313" cy="220" r="40" stroke="black" fill="none" id="circle_click" stroke-width="3"/>
     		</g>
 
 
@@ -179,6 +241,7 @@
 			<use href="#sky"/>
 
 			<use href="#sun" />
+
 
 			<use href="#cloud" transform="translate(-120,-80)">
 				<animate id="nuage11" attributeType="XML" attributeName="x" from="0" to="750" dur="6s" begin="0s; nuage12.end"/>
@@ -195,6 +258,17 @@
 				<animate id="nuage32" attributeType="XML" attributeName="x" from="-375" to="0" dur="4s" begin="nuage31.end"/>
 			</use>
 
+			<use href="#mountains" x="-100" y="500" filter="url(#moutain_blur)"/>
+
+			<use href="#full_house" x="780" y="1300" transform="scale(0.18)" filter="url(#house_blur)"/>
+			<use href="#full_house" x="2500" y="950" transform="scale(0.2)" filter="url(#house_blur)"/>
+
+			<use href="#flag" x="290" y="200"/>
+			<use href="#flag" x="290" y="200">
+				<!--this acts as a "disable click"-->
+				<animate attributeType="CSS" attributeName="visibility" to="hidden" dur="0s" begin="click" fill="freeze" id="hide_starting_flag"/>
+			</use>
+
 			<use href="#starting_slope"/>
 
 			<use href="#full_tree" transform="translate(150,420) scale(0.7,0.7)" />
@@ -205,25 +279,36 @@
 
 			<!-- Characters Creation-->
 			<use href="#red_guy_ski" transform="translate(350,155) scale(0.5)">
-				<animate attributeType="XML" attributeName="x" from="0" to="70" dur="1.4s" fill="freeze" id ="strred"/>
-				<animateMotion dur="5s" begin="strred.end" repeatCount="indefinite" rotate="auto">
+				<animate attributeType="XML" attributeName="x" from="0" to="70" dur="1.4s" fill="freeze" begin="hide_starting_flag.begin" id="strred"/>
+				<animateMotion dur="3s" begin="strred.end" repeatCount="indefinite" rotate="auto">
 					<mpath xlink:href="#slope_move"/>
 				</animateMotion>
 			</use>
 
-			<use href="#MRNoel_full_ski" >
-				<animate attributeType="XML" attributeName="x" from="50" to="150" dur="2s" fill="freeze" id ="str"/>
-				<animateMotion dur="4s" begin="str.end" repeatCount="indefinite" rotate="auto">
+			<use href="#MRNoel_full_ski" x="50">
+				<animate attributeType="XML" attributeName="x" from="50" to="150" dur="2s" fill="freeze" begin="hide_starting_flag.begin" id ="str"/>
+				<animateMotion dur="2s" begin="str.end" repeatCount="indefinite" rotate="auto">
 					<mpath xlink:href="#slope_move"/>
 				</animateMotion>
 			</use>
 
 			<use href="#sandrine_full_ski" transform="translate(250,255)">
-				<animate attributeType="XML" attributeName="x" from="0" to="70" dur="1.6s" fill="freeze" id ="strsan"/>
-				<animateMotion dur="7s" begin="strsan.end" repeatCount="indefinite" rotate="auto">
+				<animate attributeType="XML" attributeName="x" from="0" to="70" dur="1.6s" fill="freeze" begin="hide_starting_flag.begin" id ="strsan"/>
+				<animateMotion dur="4s" begin="strsan.end" repeatCount="indefinite" rotate="auto">
 					<mpath xlink:href="#slope_move"/>
 				</animateMotion>
 			</use>
+
+			<g id="start_trigger">
+				<use href="#text_click" x="275" y="160"/>
+				<use href="#circle_click"/>
+				<animate attributeType="CSS" attributeName="visibility" to="hidden" fill="freeze"/>
+				<!--this prevent the group from "appearing" if clicked on before 4 seconds-->
+				<animateTransform attributeType="xml" attributeName="transform" type="translate" from="0 0" to="500 500" dur="0.1s" begin="hide_starting_flag.begin" fill="freeze" />
+				<animate attributeType="CSS" attributeName="visibility" to="visible" begin="4s" />
+				<animate attributeType="CSS" attributeName="visibility" to="hidden" begin="hide_starting_flag.begin" fill="freeze" />
+			</g>
+
     </g>
 
       <g id="scene2">
@@ -266,8 +351,25 @@
 					<animate attributeType="CSS" attributeName="visibility" to="hidden" begin="toSc2.begin" fill="freeze"/>
 					<animate attributeType="CSS" attributeName="visibility" to="visible" dur="0.5s" begin="Noel_sc2_slide.end; explodeBlink2.end" fill="freeze" id="explodeBlink1"/>
 					<animate attributeType="CSS" attributeName="visibility" to="hidden" dur="0.2s" begin="explodeBlink1.end" fill="freeze" id="explodeBlink2"/>
-					<animateTransform attributeType="xml" attributeName="transform" type="scale" from="0 0"  to="5000000 500000" begin="toSc3.begin"/> <!--couldn't figure out how to stop the blinking-->
+					<!--couldn't figure out how to stop the blinking but by doing it this way-->
+					<animateTransform attributeType="xml" attributeName="transform" type="scale" from="0 0"  to="1000 1000" begin="toSc3.begin"/>
 				</use>
+
+				<use href="#cloud" transform="translate(-120,-80)">
+					<animate id="nuage11" attributeType="XML" attributeName="x" from="0" to="750" dur="6s" begin="0s; nuage12.end"/>
+					<animate id="nuage12" attributeType="XML" attributeName="x" from="-250" to="0" dur="2s" begin="nuage11.end"/>
+				</use>
+
+				<use href="#cloud" transform="translate(300,-30)" >
+					<animate id="nuage21" attributeType="XML" attributeName="x" from="0" to="750" dur="7s" begin="0s; nuage22.end"/>
+					<animate id="nuage22" attributeType="XML" attributeName="x" from="-750" to="0" dur="7s" begin="nuage21.end"/>
+				</use>
+
+				<use href="#cloud" transform="translate(-200, -10)" >
+					<animate id="nuage31" attributeType="XML" attributeName="x" from="0" to="750" dur="9s" begin="0s; nuage32.end"/>
+					<animate id="nuage32" attributeType="XML" attributeName="x" from="-375" to="0" dur="4s" begin="nuage31.end"/>
+				</use>
+
 				<use href="#slope"/>
 
 
@@ -303,6 +405,22 @@
 
 				 <!--Environnement Creation-->
 				 <use href="#sky"/>
+
+				 <use href="#cloud" transform="translate(-120,-80)">
+					 <animate id="nuage11" attributeType="XML" attributeName="x" from="0" to="750" dur="6s" begin="0s; nuage12.end"/>
+					 <animate id="nuage12" attributeType="XML" attributeName="x" from="-250" to="0" dur="2s" begin="nuage11.end"/>
+				 </use>
+
+				 <use href="#cloud" transform="translate(300,-30)" >
+					 <animate id="nuage21" attributeType="XML" attributeName="x" from="0" to="750" dur="7s" begin="0s; nuage22.end"/>
+					 <animate id="nuage22" attributeType="XML" attributeName="x" from="-750" to="0" dur="7s" begin="nuage21.end"/>
+				 </use>
+
+				 <use href="#cloud" transform="translate(-200, -10)" >
+					 <animate id="nuage31" attributeType="XML" attributeName="x" from="0" to="750" dur="9s" begin="0s; nuage32.end"/>
+					 <animate id="nuage32" attributeType="XML" attributeName="x" from="-375" to="0" dur="4s" begin="nuage31.end"/>
+				 </use>
+
 				 <use href="#mountain"/>
 				 <use href="#springboard"/>
 				 <use href="#full_tree" transform="translate(320, 440) scale(0.6,0.6)"/>
@@ -334,7 +452,6 @@
         <use href="#cloud" transform="translate(-200, 150)" >
           <animate id="nuage31" attributeType="XML" attributeName="x" from="750" to="-550" dur="1s" begin="0.3s" repeatCount="indefinite"/>
         </use>
-
 
         <!--Character Creation-->
         <use href="#sandrine_full_ski" transform="translate(35,190)">
@@ -394,11 +511,11 @@
 
 				<!--Finish pole-->
 				<g id="finish_pole">
-					<rect width="6" height="100" fill="#A0522D"/>
+					<rect width="6" height="160" fill="#A0522D"/>
 				</g>
 
 				<g id="full_finish">
-					<use href="#finish_pole"/>
+					<!--<use href="#finish_pole"/>-->
 					<use href="#finish_pole" x="90"/>
 					<rect width="90" height="50" fill="white"/>
 					<text y="57" fill="black" font-family="Arial" transform="scale(0.85)">Grenoble 1968</text>
@@ -416,47 +533,30 @@
 					<rect fill="#606060" width="60" height="90"/>
 				</g>
 
-				<linearGradient id="roof_grad" x1="0%" y1="50%" x2="0%" y2="0%">
-					<stop offset="0%" style="stop-color:brown;stop-opacity:1" />
-					<stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:1" />
-				</linearGradient>
-
-				<g id="roof">
-					<use href="#chimney" x="250" y="-100"/>
-					<path d="M0,0 l175,-100 l175,100 z" fill="url(#roof_grad)"/>
+				<!--Misc-->
+				<g id="iut2_logo">
+					<text fill="#303030" font-family="Arial" transform="scale(1.5)" font-weight="bold">IUT</text>
+					<text x="28" fill="red" font-family="Arial" transform="scale(1.5)" font-weight="bold">2</text>
 				</g>
 
-				<g id="door">
-					<rect rx="3" ry="3" fill="#666699" width="90" height="130"/>
-					<circle cx="15" cy="70" r="8" fill="#ffcc00"/>
-					<ellipse cx="-39" cy="56" rx="4" ry="2" fill="white" transform="rotate(-45)"/>
+				<g id="oxford_logo">
+					<text x="5" y="-35" fill="#c91616" font-family="Arial" transform="scale(1.3)" font-weight="bold">OXFORD</text>
+					<text x="-10" y="-15" fill="#1a1aff" transform="scale(1.7)" font-weight="bold">BROOKES</text>
+					<text x="-9" y="-7" fill="#c91616" font-family="Arial" transform="scale(1.3)" font-weight="bold">UNIVERSITY</text>
 				</g>
 
-				<g id="house_base">
-					<rect rx="3" ry="3" width="300" height="200" fill="#993300"/>
+				<g id="black_white_squares"> <!--for finish line-->
+					<rect width="30" height="30" fill="white"/>
+					<rect x="30" width="30" height="30" fill="black"/>
+					<rect y="30" width="30" height="30" fill="black"/>
+					<rect x="30" y="30" width="30" height="30" fill="white"/>
 				</g>
 
-				<g id="window_brilliance">
-					<path d="M0,0 l0,-20 l20,-30 l20,0 z" fill="white"/>
+				<g id="full_finish_line">
+					<use href="#black_white_squares"/>
+					<use href="#black_white_squares" y="60"/>
+					<use href="#black_white_squares" y="120"/>
 				</g>
-
-				<g id="window">
-					<rect rx="3" ry="3" width="70" height="70" fill="#99ccff"/>
-					<use href="#window_brilliance" x="" y="50"/>
-					<rect x="33" width="5" height="70" fill="black"/>
-					<rect y="33" width="70" height="5" fill="black"/>
-				</g>
-
-
-				<g id="full_house">
-					<use href="#roof"/>
-					<use href="#house_base" x="25"/>
-					<use href="#door" x="130" y="70"/>
-					<use href="#window" x="40" y="50"/>
-					<use href="#window" x="240" y="50"/>
-				</g>
-				<!---->
-
 
 
 			<!--Sky & Component creation-->
@@ -510,15 +610,6 @@
 					<animateMotion path="M0,0 l0,-50 l0,50" dur="0.2s" begin="0.5s" repeatCount="indefinite"/>
 				</use>
 
-
-
-
-				<g id="full_finish_line" transform="translate(570,350)">
-					<use href="#black_white_squares"/>
-					<use href="#black_white_squares" y="60"/>
-					<use href="#black_white_squares" y="120"/>
-				</g>
-
 				<rect x="0" y="270" width="750" height="80" fill="#ff9900" opacity="0.9"/>
 				<rect x="0" y="285" width="750" height="50" fill="white"/>
 				<use href="#iut2_logo" x="30" y="320"/>
@@ -528,31 +619,19 @@
 				<use href="#iut2_logo" x="600" y="320"/>
 				<use href="#oxford_logo" x="800" y="380" transform="scale(0.9)"/>
 
+				<use href="#full_finish_line" x="-40" y="350" transform="skewX(55)"/>
 
-				<g id="iut2_logo">
-					<text fill="#303030" font-family="Arial" transform="scale(1.5)" font-weight="bold">IUT</text>
-					<text x="28" fill="red" font-family="Arial" transform="scale(1.5)" font-weight="bold">2</text>
-				</g>
-
-				<g id="oxford_logo">
-					<text x="5" y="-35" fill="#c91616" font-family="Arial" transform="scale(1.3)" font-weight="bold">OXFORD</text>
-					<text x="-10" y="-15" fill="#1a1aff" transform="scale(1.7)" font-weight="bold">BROOKES</text>
-					<text x="-9" y="-7" fill="#c91616" font-family="Arial" transform="scale(1.3)" font-weight="bold">UNIVERSITY</text>
-				</g>
-
-
-
-				<use href="#full_finish" x="170" y="40" transform="scale(2.5)"/>
+				<use href="#finish_pole" x="190" y="190" transform="scale(2.5,1)"/>
 
 				<!--Contestants-->
-				<use href="#sandrine_full_ski" >
+				<use href="#sandrine_full_ski" transform="translate(-40,60)">
 					<animateMotion dur="1.5s"
 						path="M0 60 C100 120 250 250 350 320 L550 320" fill="none" stroke="black" begin="toSc5.begin" id="sandrine_landing"/>
-					<animateTransform dur="1s" attributeType="xml" attributeName="transform" type="translate" from="0 0" to="150 0" begin="sandrine_landing.end" fill="freeze"/>
+					<animateTransform dur="1s" attributeType="xml" attributeName="transform" type="translate" to="155 50" begin="sandrine_landing.end" fill="freeze"/>
 					<animateTransform dur="1s" attributeType="xml" attributeName="transform" type="scale" from="1 1" to="-1 1" begin="sandrine_landing.end" fill="freeze" additive="sum"/>
 				</use>
 
-				<use href="#red_guy_ski" transform="scale(0.5,0.5) translate(-250,0)">
+				<use href="#red_guy_ski" transform="scale(0.5,0.5) translate(-270,80)">
 					<animateMotion dur="1.7s"
 						path="M0 30 C100 50 250 180 350 250 L545 250" rotate="90" fill="none" stroke="black" begin="toSc5.begin" id="red_guy_landing"/>
 					<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 -50 30" to="90 -50 30" fill="freeze" dur="1s" additive="sum" begin="red_guy_landing.end"/>
@@ -560,14 +639,13 @@
 					<animateTransform attributeType="xml" attributeName="transform" type="translate" from="0 0" to="0 -250" fill="freeze" dur="1.5s" additive="sum" begin="red_guy_fall.end"/>
 				</use>
 
+				<!--so that the skew transformation on the pole on the right is less visible-->
+				<rect width="18" height="18" x="697" y="190" rx="3" ry="3" fill="#A0522D"/>
+				<use href="#full_finish" x="190" y="-55" transform="scale(2.5) skewY(25)"/>
+
 			</g>
 
-			<g id="black_white_squares"> <!--for finish line-->
-				<rect width="30" height="30" fill="white"/>
-				<rect x="30" width="30" height="30" fill="black"/>
-				<rect y="30" width="30" height="30" fill="black"/>
-				<rect x="30" y="30" width="30" height="30" fill="white"/>
-			</g>
+
 
 
     </defs>
@@ -577,13 +655,13 @@
 			<animate attributeType="CSS" attributeName="visibility" to="hidden" dur="5s" begin="toSc4.end" fill="freeze" id="toSc5"/>
 		</use>
 		<use href="#scene3">
-			<animate attributeType="CSS" attributeName="visibility" to="hidden" dur="5s" begin="toSc3.end" fill="freeze" id="toSc4" />
+			<animate attributeType="CSS" attributeName="visibility" to="hidden" dur="3s" begin="toSc3.end" fill="freeze" id="toSc4" />
 		</use>
 		<use href="#scene2">
-			<animate attributeType="CSS" attributeName="visibility" to="hidden" dur="5s" begin="toSc2.end" fill="freeze" id="toSc3" />
+			<animate attributeType="CSS" attributeName="visibility" to="hidden" dur="2s" begin="toSc2.end" fill="freeze" id="toSc3" />
 		</use>
 		<use href="#scene1">
-    	<animate attributeType="CSS" attributeName="visibility" to="hidden" begin="5s" dur="5s" fill="freeze" id="toSc2"/>
+    	<animate attributeType="CSS" attributeName="visibility" to="hidden" begin="hide_starting_flag.begin + 4s" dur="2.5s" fill="freeze" id="toSc2"/>
   	</use>
 
 </svg>
